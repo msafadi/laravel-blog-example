@@ -18,11 +18,28 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/admin/categories', [CategoriesController::class, 'index'])
-    ->name('admin.categories.index');
 
-Route::get('/admin/categories/create', [CategoriesController::class, 'create'])
-    ->name('admin.categories.create');
+Route::group([
+    'prefix' => '/admin/categories',
+    'as' => 'admin.categories.',
+], function() {
 
-Route::post('/admin/categories', [CategoriesController::class, 'store'])
-    ->name('admin.categories.store');
+    Route::get('/', [CategoriesController::class, 'index'])
+        ->name('index');
+
+    Route::get('/create', [CategoriesController::class, 'create'])
+        ->name('create');
+
+    Route::post('/', [CategoriesController::class, 'store'])
+        ->name('store');
+
+    Route::get('/{id}/edit', [CategoriesController::class, 'edit'])
+        ->name('edit');
+
+    Route::put('/{id}', [CategoriesController::class, 'update'])
+        ->name('update');
+
+    Route::delete('/{id}', [CategoriesController::class, 'destroy'])
+        ->name('destroy');
+
+});

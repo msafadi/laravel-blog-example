@@ -24,7 +24,9 @@ class CategoriesController extends Controller
 
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.categories.create', [
+            'category' => new Category()
+        ]);
     }
 
     public function store(Request $request)
@@ -41,5 +43,38 @@ class CategoriesController extends Controller
         return redirect()
             ->route('admin.categories.index')
             ->with('success', 'Category added!');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+
+        return view('admin.categories.edit', [
+            'category' => $category,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $category->name = $request->input('name');
+        $category->slug = Str::slug( $request->input('name') );
+        $category->description = $request->post('description');
+        $category->status = $request->status;
+        $category->save();
+
+        return redirect()
+            ->route('admin.categories.index')
+            ->with('success', 'Category updated!');
+    }
+
+    public function destroy($id)
+    {
+        Category::destroy($id);
+
+        return redirect()
+            ->route('admin.categories.index')
+            ->with('success', 'Category deleted!');
     }
 }
