@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,6 +33,14 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|string|max:255|min:3|unique:categories,name',
+            'description' => 'nullable|string|max:500',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:200|dimensions:min_width=150,min_height=150',
+            'status' => 'in:public,archived,private',
+        ]);
+
         // Name: Political News
         // Slug: political-news
         $category = new Category();
@@ -62,7 +71,7 @@ class CategoriesController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
 
