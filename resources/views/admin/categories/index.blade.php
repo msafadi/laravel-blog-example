@@ -23,6 +23,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th></th>
                 <th>Name</th>
                 <th>Status</th>
                 <th>Created At</th>
@@ -34,6 +35,9 @@
             @foreach($categories as $category)
             <tr>
                 <td>{{ $category->id }}</td>
+                <td>
+                    <img src="{{ $category->image_url }}" height="60">
+                </td>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->status }}</td>
                 <td>{{ $category->created_at }}</td>

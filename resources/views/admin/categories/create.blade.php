@@ -9,7 +9,7 @@
 @endsection
 
 @section('main')
-<form action="{{ route('admin.categories.store') }}" method="post">
+<form action="{{ route('admin.categories.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     
     @include('admin.categories._form')

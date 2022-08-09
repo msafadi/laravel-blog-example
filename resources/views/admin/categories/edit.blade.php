@@ -9,7 +9,7 @@
 @endsection
 
 @section('main')
-<form action="{{ route('admin.categories.update', $category->id) }}" method="post">
+<form action="{{ route('admin.categories.update', $category->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
     
