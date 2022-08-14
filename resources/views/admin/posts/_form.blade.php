@@ -28,6 +28,13 @@
 </div>
 
 <div class="form-group">
+    <div class="custom-control custom-switch">
+        <input type="checkbox" name="featured" value="1" class="custom-control-input" id="featured" @checked(old('featured', $post->featured) == 1)>
+        <label class="custom-control-label" for="featured">Featured post.</label>
+    </div>
+</div>
+
+<div class="form-group">
     <label for="content">Content</label>
     <textarea @class(['form-control', 'is-invalid' => $errors->has('content')]) id="content" name="content">{{ old('content', $post->content) }}</textarea>
     @error('content')
