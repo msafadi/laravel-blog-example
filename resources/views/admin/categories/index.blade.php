@@ -25,6 +25,7 @@
                 <th>ID</th>
                 <th></th>
                 <th>Name</th>
+                <th>Posts #</th>
                 <th>Status</th>
                 <th>Created At</th>
                 <th></th>
@@ -39,6 +40,7 @@
                     <img src="{{ $category->image_url }}" height="60">
                 </td>
                 <td>{{ $category->name }}</td>
+                <td>{{ $category->posts_count }}</td>
                 <td>{{ $category->status }}</td>
                 <td>{{ $category->created_at }}</td>
                 <td><a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-outline-success">Edit</a></td>
@@ -53,5 +55,7 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $categories->links() }}
 
 @endsection

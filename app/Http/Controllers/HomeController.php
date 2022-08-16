@@ -16,7 +16,7 @@ class HomeController extends Controller
 
         $posts = Post::where('featured', '=', 0)
             ->latest()
-            ->paginate();
+            ->paginate(15);
 
         return view('front.home', [
             'featured_posts' => $featured_posts,

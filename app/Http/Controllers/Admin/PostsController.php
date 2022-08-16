@@ -20,7 +20,7 @@ class PostsController extends Controller
     {
         $posts = Post::with('category')
             ->withCount('comments') // comments_count
-            ->get();
+            ->paginate(5);
 
         return view('admin.posts.index', [
             'posts' => $posts,

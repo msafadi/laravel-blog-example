@@ -14,7 +14,7 @@ class CategoriesController extends Controller
     // Actions Methods
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::withCount('posts')->paginate();
 
         $success = session('success');
 

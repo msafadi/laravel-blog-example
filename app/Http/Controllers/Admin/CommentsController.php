@@ -15,7 +15,7 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::with('post')->latest()->get();
+        $comments = Comment::with('post')->latest()->paginate();
 
         return view('admin.comments.index', [
             'comments' => $comments,
