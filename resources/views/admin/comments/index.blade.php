@@ -26,7 +26,7 @@
         <tr>
             <td>{{ $comment->body }}</td>
             <td>{{ $comment->name }}<br>{{ $comment->email }}</td>
-            <td>{{ $comment->post_id }}</td>
+            <td>{{ $comment->post->title }}</td>
             <td>{{ $comment->status }}</td>
             <td>{{ $comment->created_at }}</td>
             <td><a href="{{ route('admin.comments.edit', $comment->id) }}" class="btn btn-sm btn-outline-success">Edit</a></td>

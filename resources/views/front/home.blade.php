@@ -19,7 +19,7 @@
                                 <div class="hero__entry-text-inner">
                                     <div class="hero__entry-meta">
                                         <span class="cat-links">
-                                            <a href="category.html">Inspiration</a>
+                                            <a href="category.html">{{ $post->category->name }}</a>
                                         </span>
                                     </div>
                                     <h2 class="hero__entry-title">
@@ -74,7 +74,7 @@
                                 <div class="entry__header">
                                     <div class="entry__meta">
                                         <span class="cat-links">
-                                            <a href="#">Design</a>
+                                            <a href="#">{{ $post->category->name }}</a>
                                         </span>
                                         <span class="byline">
                                             By:

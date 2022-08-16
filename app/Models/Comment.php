@@ -18,4 +18,15 @@ class Comment extends Model
         'body',
         'status',
     ];
+
+    /**
+     * Get the post for the comment.
+     * Many comments belong to one post. (Many to One)
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id', 'id');
+    }
 }

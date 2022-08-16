@@ -39,8 +39,7 @@
                                         </svg>
                                           
                                         <span class="cat-links">
-                                            <a href="#0">Inspiration</a>
-                                            <a href="#0">Design</a>
+                                            <a href="#0">{{ $post->category->name }}</a>
                                         </span>
                                     </div>
                                 </div>

@@ -13,9 +13,10 @@ class PostsController extends Controller
     {
         $post = Post::where('slug', '=', $slug)->firstOrFail();
 
-        $comments = Comment::where('post_id', '=', $post->id)
-            ->latest()
-            ->get();
+        // $comments = Comment::where('post_id', '=', $post->id)
+        //     ->latest()
+        //     ->get();
+        $comments = $post->comments()->latest()->get();
 
         return view('front.posts.show', [
             'post' => $post,

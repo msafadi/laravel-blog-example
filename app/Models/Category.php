@@ -18,4 +18,15 @@ class Category extends Model
         }
         return asset('images/blank.png');
     }
+
+    /**
+     * Get the posts for the category.
+     * One category has many posts. (One to Many)
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'category_id', 'id');
+    }
 }
