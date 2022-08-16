@@ -67,6 +67,10 @@ Route::group([
     */
     Route::resource('posts', PostsController::class);
 
+    Route::patch('comments/status/approve', [
+        App\Http\Controllers\Admin\CommentsController::class, 'approve'
+    ])->name('comments.approve');
+    
     Route::resource('comments', App\Http\Controllers\Admin\CommentsController::class);
 
 });

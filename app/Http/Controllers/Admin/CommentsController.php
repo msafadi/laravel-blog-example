@@ -87,4 +87,18 @@ class CommentsController extends Controller
     {
         //
     }
+
+    // Bulk actions (approve)
+    public function approve(Request $request)
+    {
+        $comment_ids = $request->input('comment_id');
+
+        Comment::whereIn('id', $comment_ids)->update([
+            'status' => 'approved',
+        ]);
+
+        return redirect()
+            ->back()
+            ->with('success', 'Comments approved successfully');
+    }
 }
