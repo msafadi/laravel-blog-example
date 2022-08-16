@@ -20,6 +20,7 @@
             <th></th>
             <th>Title</th>
             <th>Category</th>
+            <th>Comments #</th>
             <th>Status</th>
             <th>Published At</th>
             <th></th>
@@ -33,6 +34,7 @@
             <td><img src="{{ $post->image_url }}" height="60"></td>
             <td>{{ $post->title }}</td>
             <td>{{ $post->category_id }}</td>
+            <td></td>
             <td>{{ $post->status }}</td>
             <td>{{ $post->published_at }}</td>
             <td><a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-sm btn-outline-success">Edit</a></td>

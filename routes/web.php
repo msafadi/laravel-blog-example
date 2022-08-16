@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,9 @@ Route::get('/', [HomeController::class, 'index'])
 
 Route::get('/posts/{post}', [\App\Http\Controllers\PostsController::class, 'show'])
     ->name('posts.show');
+
+Route::post('comments', [CommentsController::class, 'store'])
+    ->name('comments.store');
 
 Route::group([
     'prefix' => '/admin',
@@ -62,5 +66,7 @@ Route::group([
     DELETE admin/posts/{post} -> destroy@PostsController -> admin.posts.destroy
     */
     Route::resource('posts', PostsController::class);
+
+    Route::resource('comments', App\Http\Controllers\Admin\CommentsController::class);
 
 });
