@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -20,57 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
-Route::get('/posts/{post}', [\App\Http\Controllers\PostsController::class, 'show'])
+Route::get('/posts/{post}', [PostsController::class, 'show'])
     ->name('posts.show');
 
 Route::post('comments', [CommentsController::class, 'store'])
     ->name('comments.store');
 
-Route::group([
-    'prefix' => '/admin',
-    'as' => 'admin.',
-], function() {
+require __DIR__ . '/admin.php';
 
-    /*Route::group([
-        'prefix' => '/categories',
-        'as' => 'categories.',
-    ], function() {
-        Route::get('/', [CategoriesController::class, 'index'])
-            ->name('index');
-
-        Route::get('/create', [CategoriesController::class, 'create'])
-            ->name('create');
-
-        Route::post('/', [CategoriesController::class, 'store'])
-            ->name('store');
-
-        Route::get('/{id}/edit', [CategoriesController::class, 'edit'])
-            ->name('edit');
-
-        Route::put('/{id}', [CategoriesController::class, 'update'])
-            ->name('update');
-
-        Route::delete('/{id}', [CategoriesController::class, 'destroy'])
-            ->name('destroy');
-    });*/
-    Route::resource('categories', CategoriesController::class);
-
-    // Define 7 routes
-    /*
-    GET admin/posts -> index@PostsController  -> admin.posts.index
-    GET admin/posts/create -> create@PostsController -> admin.posts.create
-    POST admin/posts -> store@PostsController -> admin.posts.store
-    GET admin/posts/{post} -> show@PostsController -> admin.posts.show
-    GET admin/posts/{post}/edit -> edit@PostsController -> admin.posts.edit
-    PUT admin/posts/{post} -> update@PostsController -> admin.posts.update
-    DELETE admin/posts/{post} -> destroy@PostsController -> admin.posts.destroy
-    */
-    Route::resource('posts', PostsController::class);
-
-    Route::patch('comments/status/approve', [
-        App\Http\Controllers\Admin\CommentsController::class, 'approve'
-    ])->name('comments.approve');
-    
-    Route::resource('comments', App\Http\Controllers\Admin\CommentsController::class);
-
-});
+require __DIR__ . '/auth.php';
