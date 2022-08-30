@@ -9,9 +9,11 @@
 
 @section('main')
 
+    @can('create', App\Models\Category::class)
     <div class="mb-5">
         <a href="{{ route('admin.categories.create') }}" class="btn btn-sm btn-outline-primary">New</a>
     </div>
+    @endcan
 
     @if($success)
     <div class="alert alert-success">
@@ -43,13 +45,19 @@
                 <td>{{ $category->posts_count }}</td>
                 <td>{{ $category->status }}</td>
                 <td>{{ $category->created_at }}</td>
-                <td><a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-outline-success">Edit</a></td>
                 <td>
+                    @can('update', $category)
+                    <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-outline-success">Edit</a>
+                    @endcan
+                </td>
+                <td>
+                    @can('delete', $category)
                     <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <button class="btn btn-sm btn-outline-danger">Delete</button>
                     </form>
+                    @endcan
                 </td>
             </tr>
             @endforeach

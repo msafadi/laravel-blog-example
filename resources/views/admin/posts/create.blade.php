@@ -4,8 +4,8 @@
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">Posts</a></li>
-    <li class="breadcrumb-item active">Create</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.posts.index') }}">{{ __('Posts') }}</a></li>
+    <li class="breadcrumb-item active">{{ __('Create') }}</li>
 @endsection
 
 @section('main')

@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -48,5 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id')
+            ->withDefault();
     }
 }

@@ -1,28 +1,28 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Posts')
+@section('title', __('admin.Posts'))
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Posts</li>
+    <li class="breadcrumb-item active">{{ __('admin.Posts') }}</li>
 @endsection
 
 @section('main')
 
 <div class="mb-5">
-    <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Create Post</a>
+    <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">{{ trans('admin.Create') }}</a>
 </div>
 
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>@lang('admin.ID')</th>
             <th></th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Comments #</th>
-            <th>Status</th>
-            <th>Published At</th>
+            <th>{{ __('Title') }}</th>
+            <th>{{ __('Category') }}</th>
+            <th>{{ __('Comments #') }}</th>
+            <th>{{ __('Status') }}</th>
+            <th>{{ __('Published At') }}</th>
             <th></th>
             <th></th>
         </tr>

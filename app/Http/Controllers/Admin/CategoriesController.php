@@ -14,6 +14,8 @@ class CategoriesController extends Controller
     // Actions Methods
     public function index()
     {
+        $this->authorize('viewAny', Category::class);
+
         $categories = Category::withCount('posts')->paginate();
 
         $success = session('success');
@@ -26,6 +28,8 @@ class CategoriesController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Category::class);
+
         return view('admin.categories.create', [
             'category' => new Category()
         ]);
@@ -33,7 +37,8 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
-
+        $this->authorize('create', Category::class);
+        
         $request->validate([
             'name' => 'required|string|max:255|min:3|unique:categories,name',
             'description' => 'nullable|string|max:500',
@@ -66,6 +71,8 @@ class CategoriesController extends Controller
     {
         $category = Category::findOrFail($id);
 
+        $this->authorize('update', $category);
+
         return view('admin.categories.edit', [
             'category' => $category,
         ]);
@@ -74,6 +81,8 @@ class CategoriesController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
+
+        $this->authorize('update', $category);
 
         $old_image = $category->image_path;
 
@@ -102,6 +111,9 @@ class CategoriesController extends Controller
     {
         //Category::destroy($id);
         $category = Category::findOrFail($id);
+
+        $this->authorize('delete', $category);
+
         $category->delete();
 
         if ($category->image_path) {

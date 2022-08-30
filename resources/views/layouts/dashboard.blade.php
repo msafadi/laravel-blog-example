@@ -3,7 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale') }}" @if(App::currentLocale() == 'ar') dir="rtl" @endif>
 
 <head>
     <meta charset="utf-8">
@@ -15,7 +15,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
+    @if(App::currentLocale() == 'ar')
+    <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/adminlte-rtl.min.css') }}">
+    @else
     <link rel="stylesheet" href="{{ asset('assets/admin/dist/css/adminlte.min.css') }}">
+    @endif
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -57,6 +61,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fas fa-language"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="?lang=en" class="dropdown-item">English</a>
+                        <a href="?lang=ar" class="dropdown-item">العربية</a>
                     </div>
                 </li>
 
@@ -156,7 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <form action="{{ route('logout') }}" method="post" class="mt-3">
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">{{ __('Logout') }}</button>
                         </form>
                     </div>
                 </div>
@@ -181,30 +195,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item">
                             <a href="{{ route('admin.categories.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-tags"></i>
-                                <p>Categories</p>
+                                <p>{{ __('Categories') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.posts.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-list"></i>
-                                <p>Posts</p>
+                                <p>{{ __('Posts') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.comments.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-comments"></i>
-                                <p>Comments
+                                <p>{{ __('Comments') }}
                                 <span class="right badge badge-danger">New</span></p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.subscribers.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
-                                <p>Subscribers
+                                <p>{{ __('Subscribers') }}
                                 <span class="right badge badge-info">New</span></p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.roles.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-lock"></i>
+                                <p>{{ __('Permission Roles') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.users.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user"></i>
+                                <p>{{ __('Users') }}</p>
+                            </a>
+                        </li>
                     </ul>
+                    
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

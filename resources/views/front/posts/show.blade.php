@@ -117,7 +117,7 @@
                             <div id="comments">
                                 <div class="large-12">
 
-                                    <h3>{{ $comments->count() }} Comments</h3>
+                                    <h3>{{ trans_choice(':count Comments', $comments->count(), ['count' => $comments->count()]) }}</h3>
 
                                     <!-- START commentlist -->
                                     <ol class="commentlist">
@@ -160,8 +160,8 @@
                                 <div id="respond">
 
                                     <h3>
-                                    Add Comment 
-                                    <span>Your email address will not be published.</span>
+                                    {{ __('Add Comment') }} 
+                                    <span>{{ __('Your email address will not be published.') }}</span>
                                     </h3>
 
                                     <form name="contactForm" id="contactForm" method="post" action="{{ route('comments.store') }}" autocomplete="off">
@@ -186,7 +186,7 @@
                                             </div>
 
                                             <div class="column lg-12">
-                                                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large u-fullwidth" value="Add Comment" type="submit">
+                                                <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large u-fullwidth" value="{{ __('Add Comment') }}" type="submit">
                                             </div>
 
                                         </fieldset>

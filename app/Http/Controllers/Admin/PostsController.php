@@ -12,6 +12,12 @@ use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Post::class, 'post');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +27,7 @@ class PostsController extends Controller
     {
         $posts = Post::with('category')
             ->withCount('comments') // comments_count
-            ->paginate(5);
+            ->simplePaginate(5);
 
         return view('admin.posts.index', [
             'posts' => $posts,
