@@ -18,9 +18,21 @@ class PostsController extends Controller
         //     ->get();
         $comments = $post->comments()->latest()->get();
 
+        $prevPost = Post::where('id', '<', $post->id)
+            ->orderBy('id', 'DESC')
+            ->limit(1)
+            ->first();
+
+        $nextPost = Post::where('id', '>', $post->id)
+            ->orderBy('id', 'ASC')
+            ->limit(1)
+            ->first();
+
         return view('front.posts.show', [
             'post' => $post,
             'comments' => $comments,
+            'prevPost' => $prevPost,
+            'nextPost' => $nextPost,
         ]);
     }
 }

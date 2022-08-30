@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\User;
+use App\Notifications\NewCommentNotification;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -18,6 +20,9 @@ class CommentsController extends Controller
         ]);
         
         $comment = Comment::create( $request->all() );
+
+        $user = User::where('type', '=', 'admin')->first();
+        $user->notify( new NewCommentNotification($comment) );
         
         return redirect()
             ->back()

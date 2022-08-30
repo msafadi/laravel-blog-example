@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -67,6 +68,8 @@ class PostsController extends Controller
 
         // Mass assignment
         $data['slug'] = Str::slug($data['title']);
+        $data['user_id'] = Auth::id();
+
         $post = Post::create( $data );
 
         return redirect()->route('admin.posts.index')
@@ -120,6 +123,7 @@ class PostsController extends Controller
         }
 
         // Mass assignment
+        $data['user_id'] = Auth::id();
         $post->update( $data );
         
         if ($old_image && $old_image != $post->image_path) {

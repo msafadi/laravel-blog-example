@@ -23,14 +23,14 @@
                                         </span>
                                     </div>
                                     <h2 class="hero__entry-title">
-                                        <a href="{{ route('posts.show', $post->slug) }}">
+                                        <a href="{{ $post->url }}">
                                             {{ $post->title }}
                                         </a>
                                     </h2>
                                     <p class="hero__entry-desc">
-                                    {!! Str::words($post->content, 30) !!}
+                                    {{ $post->excerpt }}
                                     </p>
-                                    <a class="hero__more-link" href="{{ route('posts.show', $post->slug) }}">Read More</a>
+                                    <a class="hero__more-link" href="{{ $post->url }}">Read More</a>
                                 </div>
                             </div>
                         </article>
@@ -78,17 +78,17 @@
                                         </span>
                                         <span class="byline">
                                             By:
-                                            <a href="#0">Naruto Uzumaki</a>
+                                            <a href="#0">{{ $post->user->name }}</a>
                                         </span>
                                     </div>
-                                    <h1 class="entry__title"><a href="{{ route('posts.show', $post->slug) }}">{{ $post->title }}</a></h1>
+                                    <h1 class="entry__title"><a href="{{ $post->url }}">{{ $post->title }}</a></h1>
                                  </div>
                                 <div class="entry__excerpt">
                                     <p>
-                                        {!! Str::words($post->content, 30) !!}
+                                    {{ $post->excerpt }}
                                     </p>
                                 </div>
-                                <a class="entry__more-link" href="{{ route('posts.show', $post->slug) }}">Read More</a>
+                                <a class="entry__more-link" href="{{ $post->url }}">Read More</a>
                             </div> <!-- end entry__text -->
                         
                         </article> <!-- end article -->

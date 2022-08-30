@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -13,6 +14,7 @@ class Post extends Model
         'title',
         'slug',
         'category_id',
+        'user_id',
         'content',
         'image_path',
         'status',
@@ -48,5 +50,23 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id')
+            ->withDefault([
+                'name' => 'Anonymous'
+            ]);
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('posts.show', $this->slug);
+    }
+
+    public function getExcerptAttribute()
+    {
+        return Str::words(strip_tags($this->content), 40);
     }
 }

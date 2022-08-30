@@ -23,7 +23,7 @@
                                             <circle cx="12" cy="8" r="3.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></circle>
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z"></path>
                                         </svg>
-                                        <a href="#">Naruto Uzumaki</a> 
+                                        <a href="#">{{ $post->user->name }}</a> 
                                     </div>
                                     <div class="entry__meta-date">
                                         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -70,12 +70,12 @@
     
                                     <div class="entry__author-box">
                                         <figure class="entry__author-avatar">
-                                            <img alt="" src="images/avatars/user-06.jpg" class="avatar">
+                                            <img alt="" src="{{ asset('images/avatars/user-06.jpg') }}" class="avatar">
                                         </figure>
                                         <div class="entry__author-info">
                                             <h5 class="entry__author-name">
                                                 <a href="#0">
-                                                    Naruto Uzumaki
+                                                    {{ $post->user->name }}
                                                 </a>
                                             </h5>
                                             <p>
@@ -89,18 +89,22 @@
                                 </div> <!-- end entry-content -->
 
                                 <div class="post-nav">
+                                    @if($prevPost)
                                     <div class="post-nav__prev">
-                                        <a href="single-standard.html" rel="prev">
+                                        <a href="{{ route('posts.show', $prevPost->slug) }}" rel="prev">
                                             <span>Prev</span>
-                                            The Pomodoro Technique Really Works. 
+                                            {{ $prevPost->title }}. 
                                         </a>
                                     </div>
+                                    @endif
+                                    @if($nextPost)
                                     <div class="post-nav__next">
-                                        <a href="single-standard.html" rel="next">
+                                        <a href="{{ route('posts.show', $nextPost->slug) }}" rel="next">
                                             <span>Next</span>
-                                            How Imagery Drives User Experience.
+                                            {{ $nextPost->title }}.
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
 
                             </div> <!-- end content-primary -->

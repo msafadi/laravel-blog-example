@@ -3,6 +3,8 @@
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,12 @@ Route::get('/posts/{post}', [PostsController::class, 'show'])
 
 Route::post('comments', [CommentsController::class, 'store'])
     ->name('comments.store');
+
+Route::get('search', [SearchController::class, 'index'])
+    ->name('search');
+
+Route::post('newsletter/subscribe', [NewsletterController::class, 'store'])
+    ->name('newsletter.subscribe');
 
 require __DIR__ . '/admin.php';
 
